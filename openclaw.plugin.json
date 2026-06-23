@@ -1,0 +1,259 @@
+{
+  "id": "async-result-router",
+  "name": "Async Result Router",
+  "description": "Durable async result routing and session wake service for OpenClaw.",
+  "activation": {
+    "onStartup": true
+  },
+  "contracts": {
+    "tools": [
+      "async_result_router_register_route",
+      "async_result_router_list_routes",
+      "async_result_router_close_route",
+      "async_result_router_ack_event",
+      "async_result_router_record_outcome",
+      "async_result_router_inspect_state"
+    ]
+  },
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "enabled": {
+        "type": "boolean",
+        "default": true
+      },
+      "pollIntervalMs": {
+        "type": "integer",
+        "minimum": 1000,
+        "default": 60000
+      },
+      "statePath": {
+        "type": "string",
+        "default": "workspace/.openclaw/async-result-router/state.json"
+      },
+      "state": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "backend": {
+            "type": "string",
+            "enum": [
+              "file",
+              "runtime"
+            ],
+            "default": "file"
+          },
+          "namespace": {
+            "type": "string",
+            "default": "async-result-router"
+          },
+          "key": {
+            "type": "string",
+            "default": "router-state"
+          }
+        },
+        "default": {}
+      },
+      "routeConfigPath": {
+        "type": "string",
+        "default": "workspace/ops/async-session-routes.json"
+      },
+      "routes": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "default": []
+      },
+      "sources": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "additionalProperties": true,
+          "required": [
+            "id",
+            "type"
+          ],
+          "properties": {
+            "id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "type": {
+              "type": "string",
+              "enum": [
+                "file",
+                "mailState",
+                "command",
+                "notificationLog"
+              ]
+            },
+            "enabled": {
+              "type": "boolean",
+              "default": true
+            },
+            "trustLevel": {
+              "type": "string",
+              "enum": [
+                "trusted_structured",
+                "semi_trusted",
+                "untrusted"
+              ],
+              "default": "semi_trusted"
+            }
+          }
+        },
+        "default": []
+      },
+      "webhook": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "enabled": {
+            "type": "boolean",
+            "default": false
+          },
+          "path": {
+            "type": "string",
+            "default": "/async-result-router/events"
+          },
+          "auth": {
+            "type": "string",
+            "enum": [
+              "gateway",
+              "plugin"
+            ],
+            "default": "gateway"
+          },
+          "sourceId": {
+            "type": "string",
+            "default": "webhook"
+          },
+          "sourceType": {
+            "type": "string",
+            "default": "webhook"
+          },
+          "trustLevel": {
+            "type": "string",
+            "enum": [
+              "trusted_structured",
+              "semi_trusted",
+              "untrusted"
+            ],
+            "default": "semi_trusted"
+          }
+        },
+        "default": {}
+      },
+      "self": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "suppressGeneratedEvents": {
+            "type": "boolean",
+            "default": true
+          },
+          "producerId": {
+            "type": "string",
+            "default": "async-result-router"
+          },
+          "producerIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "default": [
+              "async-result-router"
+            ]
+          },
+          "markers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "default": [
+              "generated-by: async-result-router"
+            ]
+          },
+          "markerSourceTypes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "default": [
+              "notification",
+              "notificationLog",
+              "discord",
+              "mobile_notification",
+              "companion_notification"
+            ]
+          }
+        },
+        "default": {}
+      },
+      "wake": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "enabled": {
+            "type": "boolean",
+            "default": true
+          },
+          "dryRun": {
+            "type": "boolean",
+            "default": false
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "now",
+              "next-heartbeat"
+            ],
+            "default": "now"
+          },
+          "reason": {
+            "type": "string",
+            "default": "async-result-router:event"
+          },
+          "maxAttempts": {
+            "type": "integer",
+            "minimum": 1,
+            "default": 5
+          }
+        },
+        "default": {}
+      },
+      "legacyRoutes": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "enabled": {
+            "type": "boolean",
+            "default": true
+          },
+          "includeClosed": {
+            "type": "boolean",
+            "default": false
+          }
+        },
+        "default": {}
+      }
+    }
+  },
+  "uiHints": {
+    "statePath": {
+      "label": "Fallback State Path"
+    },
+    "state": {
+      "label": "Runtime State"
+    },
+    "routeConfigPath": {
+      "label": "Route Config Path"
+    },
+    "pollIntervalMs": {
+      "label": "Poll Interval"
+    }
+  }
+}

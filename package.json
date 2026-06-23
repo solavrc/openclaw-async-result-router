@@ -1,0 +1,52 @@
+{
+  "name": "@solavrc/openclaw-async-result-router",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "index.js",
+  "bin": {
+    "oc-async-router": "bin/async-result-router.mjs"
+  },
+  "description": "Durable async result routing and session wake service for OpenClaw.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/solavrc/openclaw-async-result-router.git"
+  },
+  "bugs": {
+    "url": "https://github.com/solavrc/openclaw-async-result-router/issues"
+  },
+  "homepage": "https://github.com/solavrc/openclaw-async-result-router#readme",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "bin",
+    "docs",
+    "index.js",
+    "LICENSE",
+    "openclaw.plugin.json",
+    "README.md",
+    "scripts",
+    "src"
+  ],
+  "keywords": [
+    "openclaw",
+    "plugin",
+    "async",
+    "routing",
+    "watcher",
+    "session"
+  ],
+  "peerDependencies": {
+    "openclaw": ">=2026.6.9"
+  },
+  "openclaw": {
+    "extensions": [
+      "./index.js"
+    ]
+  },
+  "scripts": {
+    "check": "node --check index.js && node --check bin/async-result-router.mjs && find src scripts -name '*.mjs' -print0 | xargs -0 -n1 node --check",
+    "smoke": "node scripts/smoke-test.mjs"
+  }
+}
