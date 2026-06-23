@@ -4,9 +4,10 @@
   "type": "module",
   "main": "index.js",
   "bin": {
+    "oc-async-result-router": "bin/async-result-router.mjs",
     "oc-async-router": "bin/async-result-router.mjs"
   },
-  "description": "Durable async result routing and session wake service for OpenClaw.",
+  "description": "Durable handoff for async events and results in OpenClaw.",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -34,7 +35,8 @@
     "plugin",
     "async",
     "routing",
-    "watcher",
+    "handoff",
+    "events",
     "session"
   ],
   "peerDependencies": {

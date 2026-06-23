@@ -9,13 +9,16 @@ import { inspectState } from "../src/tools.mjs";
 
 function usage() {
   return `Usage:
-  oc-async-router smoke [--keep]
-  oc-async-router poll-once --config <config.json>
-  oc-async-router show --state <state.json>
-  oc-async-router inspect --state <state.json> [--status <status>] [--route-id <route-id>] [--event-id <event-id>]
-  oc-async-router routes list --config <config.json> [--include-closed]
-  oc-async-router routes register --config <config.json> --route <route.json> [--session-key <key>] [--agent-id <id>]
-  oc-async-router routes close --config <config.json> --id <route-id> [--reason <text>]
+  oc-async-result-router smoke [--keep]
+  oc-async-result-router poll-once --config <config.json>
+  oc-async-result-router show --state <state.json>
+  oc-async-result-router inspect --state <state.json> [--status <status>] [--route-id <route-id>] [--event-id <event-id>]
+  oc-async-result-router routes list --config <config.json> [--include-closed]
+  oc-async-result-router routes register --config <config.json> --route <route.json> [--session-key <key>] [--agent-id <id>]
+  oc-async-result-router routes close --config <config.json> --id <route-id> [--reason <text>]
+
+Alias:
+  oc-async-router
 `;
 }
 

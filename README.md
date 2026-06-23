@@ -317,8 +317,10 @@ route registration/list/close.
 ## CLI
 
 ```bash
-oc-async-router routes register --config config.json --route route.json --session-key agent:main:main
-oc-async-router routes list --config config.json
-oc-async-router routes close --config config.json --id github-owner-repo-pr-123 --reason complete
-oc-async-router inspect --state workspace/.openclaw/async-result-router/state.json --status ambiguous
+oc-async-result-router routes register --config config.json --route route.json --session-key agent:main:main
+oc-async-result-router routes list --config config.json
+oc-async-result-router routes close --config config.json --id github-owner-repo-pr-123 --reason complete
+oc-async-result-router inspect --state workspace/.openclaw/async-result-router/state.json --status ambiguous
 ```
+
+`oc-async-router` is also installed as a compatibility alias.
