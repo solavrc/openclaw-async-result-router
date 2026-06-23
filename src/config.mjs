@@ -9,7 +9,7 @@ export const DEFAULT_CONFIG = {
     namespace: "async-result-router",
     key: "router-state",
   },
-  routeConfigPath: "workspace/ops/async-session-routes.json",
+  routeConfigPath: "workspace/ops/async-result-router/routes.json",
   routes: [],
   sources: [],
   webhook: {
@@ -33,10 +33,6 @@ export const DEFAULT_CONFIG = {
     mode: "now",
     reason: "async-result-router:event",
     maxAttempts: 5,
-  },
-  legacyRoutes: {
-    enabled: true,
-    includeClosed: false,
   },
 };
 
@@ -64,10 +60,6 @@ export function resolveRouterConfig(input = {}, context = {}) {
     state: {
       ...DEFAULT_CONFIG.state,
       ...(input.state || {}),
-    },
-    legacyRoutes: {
-      ...DEFAULT_CONFIG.legacyRoutes,
-      ...(input.legacyRoutes || {}),
     },
   };
 
@@ -110,10 +102,6 @@ export function resolveRouterConfig(input = {}, context = {}) {
       mode: cfg.wake.mode === "next-heartbeat" ? "next-heartbeat" : "now",
       reason: String(cfg.wake.reason || DEFAULT_CONFIG.wake.reason),
       maxAttempts: boundedInt(cfg.wake.maxAttempts, DEFAULT_CONFIG.wake.maxAttempts, 1, 100),
-    },
-    legacyRoutes: {
-      enabled: cfg.legacyRoutes.enabled !== false,
-      includeClosed: cfg.legacyRoutes.includeClosed === true,
     },
     baseDir,
   };

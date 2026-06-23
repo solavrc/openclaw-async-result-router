@@ -57,7 +57,7 @@
       },
       "routeConfigPath": {
         "type": "string",
-        "default": "workspace/ops/async-session-routes.json"
+        "default": "workspace/ops/async-result-router/routes.json"
       },
       "routes": {
         "type": "array",
@@ -221,21 +221,6 @@
             "type": "integer",
             "minimum": 1,
             "default": 5
-          }
-        },
-        "default": {}
-      },
-      "legacyRoutes": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "enabled": {
-            "type": "boolean",
-            "default": true
-          },
-          "includeClosed": {
-            "type": "boolean",
-            "default": false
           }
         },
         "default": {}

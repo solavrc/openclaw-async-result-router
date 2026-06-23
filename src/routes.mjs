@@ -42,12 +42,11 @@ export function loadRoutes(config) {
   const routes = [];
   if (Array.isArray(config.routes)) routes.push(...config.routes);
 
-  if (config.legacyRoutes?.enabled && config.routeConfigPath) {
-    const legacy = loadRouteDocument(config.routeConfigPath);
-    if (legacy && Array.isArray(legacy.routes)) routes.push(...legacy.routes.map((route) => ({
-      ...route,
-      routeFormat: "async-session-routes-v1",
-    })));
+  if (config.routeConfigPath) {
+    const stored = loadRouteDocument(config.routeConfigPath);
+    if (stored && Array.isArray(stored.routes)) {
+      routes.push(...stored.routes);
+    }
   }
 
   return routes.filter((route) => {

@@ -108,7 +108,7 @@ External payload text is never treated as an instruction for the agent.
 ## Route Matching
 
 Routes can be supplied inline through plugin config or loaded from
-`routeConfigPath`, which defaults to `workspace/ops/async-session-routes.json`.
+`routeConfigPath`, which defaults to `workspace/ops/async-result-router/routes.json`.
 A route can match by source type, sender hints, text keywords, URL fragments,
 repository, or direct `routeId` on the event.
 
